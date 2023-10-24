@@ -21,13 +21,10 @@ class Activity2 : AppCompatActivity() {
         val toast = Toast.makeText(this, "Pulsado", Toast.LENGTH_SHORT)
         toast.show()
 
-
         val webpage: Uri = Uri.parse("https://www.marca.com")
         val intent = Intent (Intent.ACTION_VIEW, webpage )
-        if(intent.resolveActivity(packageManager) != null){
-            startActivity(intent)}
-
-    }
+        startActivity(intent)
+   }
 
     fun abrirDial(view: View) {
 
@@ -39,9 +36,8 @@ class Activity2 : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_DIAL).apply {
             data = Uri.parse("tel:$num")
         }
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        }
+        startActivity(intent)
+
     }
 
     fun abrirCorreo( view: View) {
@@ -49,13 +45,19 @@ class Activity2 : AppCompatActivity() {
         val asunto = "Ejercicio Intents"
         val mensaje = "¡Ejercicio resuelto! Tu nombre aquí"
 
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:$destinatario")
-            putExtra(Intent.EXTRA_SUBJECT, asunto)
-            putExtra(Intent.EXTRA_TEXT, mensaje)
-        }
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        }
+        val correo = "mailto:m.arana@cesjuanpablosegundocadiz.es" +
+                "?subject=" + Uri.encode("Ejercicio Intens") +
+                "&body=" + Uri.encode("¡Ejercicio Resuelto! Rafael Quintero Galvín")
+
+        var email : Intent = Intent(Intent.ACTION_SENDTO,Uri.parse(correo))
+
+//
+//        val intent = Intent(Intent.ACTION_SENDTO).apply {
+//            data = Uri.parse("mailto:$destinatario")
+//            putExtra(Intent.EXTRA_SUBJECT, asunto)
+//            putExtra(Intent.EXTRA_TEXT, mensaje)
+//        }
+        startActivity(email)
+
     }
 }
